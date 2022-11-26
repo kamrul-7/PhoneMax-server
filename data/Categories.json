@@ -1,0 +1,37 @@
+[
+    {
+        "id": "01",
+        "name": "Iphone",
+        "img": "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-14-pro-max-.jpg"
+    },
+    {
+        "id": "02",
+        "name": "Samsung",
+        "img": "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-a04e.jpg"
+    },
+    {
+        "id": "03",
+        "name": "Xiaomi",
+        "img": "https://fdn2.gsmarena.com/vv/bigpic/xiaomi-redmi-note-12-pro-discovery-explorer.jpg"
+    },
+    {
+        "id": "04",
+        "name": "Vivo",
+        "img": "https://fdn2.gsmarena.com/vv/bigpic/vivo-y73t.jpg"
+    },
+    {
+        "id": "05",
+        "name": "Realme",
+        "img": "https://fdn2.gsmarena.com/vv/bigpic/realme-10-pro-plus.jpg"
+    },
+    {
+        "id": "06",
+        "name": "Oppo",
+        "img": "https://fdn2.gsmarena.com/vv/bigpic/oppo-a77s.jpg"
+    },
+    {
+        "id": "07",
+        "name": "Nokia",
+        "img": "https://fdn2.gsmarena.com/vv/bigpic/nokia-6310-2021.jpg"
+    }
+]

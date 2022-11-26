@@ -1,0 +1,379 @@
+[
+    {
+        "category_id": "01",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "Apple Iphone 14 Pro Max",
+        "name": "Kamrul Isalm",
+        "location": "Rampura",
+        "year_of_used": 1.5,
+        "resale_price": 96000,
+        "original_price": 130000,
+        "time": 4.50,
+        "total_view": 488,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-14-pro-max-.jpg"
+    },
+    {
+        "category_id": "01",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "Apple iPhone XR",
+        "name": "Rizwan",
+        "location": "Uttara",
+        "year_of_used": 2,
+        "resale_price": 60000,
+        "original_price": 900000,
+        "time": 3.00,
+        "total_view": 4808,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-xr-new.jpg"
+    },
+    {
+        "category_id": "01",
+        "rating": {
+            "number": 4.00
+        },
+        "title": "Apple iPhone X",
+        "name": "ayat",
+        "location": "Asugonj",
+        "year_of_used": 0.5,
+        "resale_price": 70000,
+        "original_price": 40000,
+        "time": 1.43,
+        "total_view": 4858,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-x.jpg"
+    },
+    {
+        "category_id": "01",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "Apple iPhone 7 Plus",
+        "name": "Amirul Islam",
+        "location": "Gazipur",
+        "year_of_used": 2,
+        "resale_price": 40000,
+        "original_price": 70000,
+        "time": 9.43,
+        "total_view": 465,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-7-plus-r2.jpg"
+    },
+    {
+        "category_id": "01",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "Apple Iphone 13 Pro Max",
+        "name": "Rana",
+        "location": "RUttara",
+        "year_of_used": 1.2,
+        "resale_price": 65000,
+        "original_price": 110000,
+        "time": 2.50,
+        "total_view": 6488,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-13-pro-max.jpg"
+    },
+    {
+        "category_id": "02",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "Samsung Galaxy A53 5G",
+        "name": "Kamrul Isalm",
+        "location": "Rampura",
+        "year_of_used": 1.5,
+        "resale_price": 23000,
+        "original_price": 30000,
+        "time": 4.00,
+        "total_view": 288,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-a53-5g-.jpg",
+        "details": ""
+    },
+    {
+        "category_id": "02",
+        "rating": {
+            "number": 5.00
+        },
+        "title": "Samsung Galaxy S10+",
+        "name": "Tushar Khan",
+        "location": "Mirpur",
+        "year_of_used": 1,
+        "resale_price": 36000,
+        "original_price": 70000,
+        "time": 5.00,
+        "total_view": 4588,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s10-plus-new.jpg"
+    },
+    {
+        "category_id": "02",
+        "rating": {
+            "number": 5.00
+        },
+        "title": "Samsung Galaxy S21 FE 5G",
+        "name": "Fahim",
+        "location": "Tejgaon",
+        "year_of_used": 2,
+        "resale_price": 15000,
+        "original_price": 20000,
+        "time": 7.50,
+        "total_view": 4788,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s21-fe-5g.jpg"
+    },
+    {
+        "category_id": "02",
+        "rating": {
+            "number": 4.3
+        },
+        "title": "Samsung Galaxy A73 5G",
+        "name": "Nishat Bhuiyan",
+        "location": "Malibug",
+        "year_of_used": 1,
+        "resale_price": 14000,
+        "original_price": 23000,
+        "time": 9.40,
+        "total_view": 768,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-a73-5g.jpg"
+    },
+    {
+        "category_id": "03",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "Redmi Note 12",
+        "name": "Faria khan",
+        "location": "Chittagong",
+        "year_of_used": 2,
+        "resale_price": 25000,
+        "original_price": 34000,
+        "time": 6.50,
+        "total_view": 4588,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/xiaomi-redmi-note-12-pro-discovery-explorer.jpg"
+    },
+    {
+        "category_id": "03",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "Xiaomi 12T Pro",
+        "name": "Fahim Shahriar",
+        "location": "Rampura",
+        "year_of_used": 1,
+        "resale_price": 35000,
+        "original_price": 45000,
+        "time": 4.20,
+        "total_view": 538,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/xiaomi-12t-pro-.jpg"
+    },
+    {
+        "category_id": "03",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "Redmi A1",
+        "name": "Nipun",
+        "location": "Dhaka",
+        "year_of_used": 1.5,
+        "resale_price": 25000,
+        "original_price": 350000,
+        "time": 4.50,
+        "total_view": 4388,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/xiaomi-a1.jpg"
+    },
+    {
+        "category_id": "03",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "Redmi k50 Ultra",
+        "name": "Kamrul Isalm",
+        "location": "Mirpur",
+        "year_of_used": 2,
+        "resale_price": 45000,
+        "original_price": 65000,
+        "time": 4.50,
+        "total_view": 543,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/xiaomi-redmi-k50-ultra.jpg"
+    },
+    {
+        "category_id": "04",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "90T",
+        "name": "Ripon",
+        "location": "Rampura",
+        "year_of_used": 1.5,
+        "resale_price": 17000,
+        "original_price": 27000,
+        "time": 4.50,
+        "total_view": 488,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/vivo-iqoo-9t-5g.jpg"
+    },
+    {
+        "category_id": "04",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "X90 Pro+",
+        "name": "Sadia Bhuiya",
+        "location": "Uttara",
+        "year_of_used": 1.6,
+        "resale_price": 35000,
+        "original_price": 60000,
+        "time": 4.50,
+        "total_view": 888,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/vivo-x90-pro-plus.jpg"
+    },
+    {
+        "category_id": "04",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "Vivo Y52t",
+        "name": "Nirab Khan",
+        "location": "Badda",
+        "year_of_used": 1.9,
+        "resale_price": 20000,
+        "original_price": 30000,
+        "time": 4.50,
+        "total_view": 948,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/vivo-y52t.jpg"
+    },
+    {
+        "category_id": "05",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "Realme Neo2T",
+        "name": "Akash",
+        "location": "Jatrabari",
+        "year_of_used": 1.5,
+        "resale_price": 19000,
+        "original_price": 13000,
+        "time": 4.50,
+        "total_view": 488,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/realme-gt-neo2t.jpg"
+    },
+    {
+        "category_id": "05",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "Realme 8s",
+        "name": "Kamrul Isalm",
+        "location": "Rampura",
+        "year_of_used": 1.5,
+        "resale_price": 14000,
+        "original_price": 7000,
+        "time": 4.50,
+        "total_view": 488,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/realme-8s-5g.jpg"
+    },
+    {
+        "category_id": "05",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "Narzo 30",
+        "name": "Kamrul Isalm",
+        "location": "Rampura",
+        "year_of_used": 1.5,
+        "resale_price": 96000,
+        "original_price": 130000,
+        "time": 4.50,
+        "total_view": 488,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/realme-narzo-50a.jpg",
+        "details": ""
+    },
+    {
+        "category_id": "06",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "Apple Iphone 14 Pro Max",
+        "name": "Kamrul Isalm",
+        "location": "Rampura",
+        "year_of_used": 1.5,
+        "resale_price": 96000,
+        "original_price": 130000,
+        "time": 4.50,
+        "total_view": 488,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/oppo-a57-5g.jpg"
+    },
+    {
+        "category_id": "06",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "Oppo A96",
+        "name": "Kamrul Isalm",
+        "location": "Rampura",
+        "year_of_used": 1.5,
+        "resale_price": 16000,
+        "original_price": 54000,
+        "time": 4.50,
+        "total_view": 488,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/oppo-a96-new.jpg"
+    },
+    {
+        "category_id": "06",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "Oppo Reno 8+",
+        "name": "Shohel",
+        "location": "Narshingdi",
+        "year_of_used": 1.5,
+        "resale_price": 96000,
+        "original_price": 130000,
+        "time": 4.50,
+        "total_view": 488,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/oppo-reno8-pro-.jpg"
+    },
+    {
+        "category_id": "07",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "Nokia 5710",
+        "name": "rahim",
+        "location": "Gazipur",
+        "year_of_used": 3,
+        "resale_price": 1500,
+        "original_price": 850,
+        "time": 4.50,
+        "total_view": 488,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/nokia-2660-flip.jpg"
+    },
+    {
+        "category_id": "07",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "Nokia-8210",
+        "name": "Kamrul Isalm",
+        "location": "Khulna",
+        "year_of_used": 1.5,
+        "resale_price": 1700,
+        "original_price": 900,
+        "time": 4.50,
+        "total_view": 488,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/nokia-8210-4g.jpg"
+    },
+    {
+        "category_id": "07",
+        "rating": {
+            "number": 4.5
+        },
+        "title": "G60",
+        "name": "Siam",
+        "location": "Nator",
+        "year_of_used": 1.5,
+        "resale_price": 33000,
+        "original_price": 13000,
+        "time": 4.50,
+        "total_view": 4868,
+        "image_url": "https://fdn2.gsmarena.com/vv/bigpic/nokia-g60-5g.jpg"
+    }
+]
