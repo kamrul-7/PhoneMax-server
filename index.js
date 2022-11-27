@@ -6,26 +6,20 @@ require('dotenv').config();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const port = process.env.PORT || 5000;
-
 const app = express();
 
 // middleware
 app.use(cors());
 app.use(express.json());
 
-
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.zwakwnm.mongodb.net/?retryWrites=true&w=majority1`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-
 function verifyJWT(req, res, next) {
-
     const authHeader = req.headers.authorization;
     if (!authHeader) {
         return res.status(401).send('unauthorized access');
     }
-
     const token = authHeader.split(' ')[1];
-
     jwt.verify(token, process.env.ACCESS_TOKEN, function (err, decoded) {
         if (err) {
             return res.status(403).send({ message: 'forbidden access' })
@@ -33,149 +27,53 @@ function verifyJWT(req, res, next) {
         req.decoded = decoded;
         next();
     })
-
 }
-
-
 async function run() {
     try {
-        const appointmentOptionCollection = client.db('PhoneMax').collection('Products');
-        const bookingsCollection = client.db('PhoneMax').collection('Categories');
+        const productsCollection = client.db('PhoneMax').collection('Products');
+        const categoriesCollection = client.db('PhoneMax').collection('Categories');
         const usersCollection = client.db('PhoneMax').collection('users');
-        const sellersCollection = client.db('PhoneMax').collection('sellers');
-        const paymentsCollection = client.db('doctorsPortal').collection('payments');
+        const sellersCollection = client.db('PhoneMax').collection('Sellers');
+        const buyersCollection = client.db('PhoneMax').collection('Buyers');
+        const paymentsCollection = client.db('doctorsPortal').collection('Payments');
+        const category = require('./data/Categories.json');
 
-        // NOTE: make sure you use verifyAdmin after verifyJWT
         const verifyAdmin = async (req, res, next) => {
             const decodedEmail = req.decoded.email;
             const query = { email: decodedEmail };
             const user = await usersCollection.findOne(query);
-
             if (user?.role !== 'admin') {
                 return res.status(403).send({ message: 'forbidden access' })
             }
             next();
         }
 
-        // Use Aggregate to query multiple collection and then merge data
+
+
         app.get('/products', async (req, res) => {
-            const date = req.query.date;
             const query = {};
-            const options = await appointmentOptionCollection.find(query).toArray();
-
-            // get the bookings of the provided date
-            const bookingQuery = { appointmentDate: date }
-            const alreadyBooked = await bookingsCollection.find(bookingQuery).toArray();
-
-            // code carefully :D
-
+            const options = await productsCollection.find(query).toArray();
             res.send(options);
         });
 
-        app.get('/v2/appointmentOptions', async (req, res) => {
-            const date = req.query.date;
-            const options = await appointmentOptionCollection.aggregate([
-                {
-                    $lookup: {
-                        from: 'bookings',
-                        localField: 'name',
-                        foreignField: 'treatment',
-                        pipeline: [
-                            {
-                                $match: {
-                                    $expr: {
-                                        $eq: ['$appointmentDate', date]
-                                    }
-                                }
-                            }
-                        ],
-                        as: 'booked'
-                    }
-                },
-                {
-                    $project: {
-                        name: 1,
-                        price: 1,
-                        slots: 1,
-                        booked: {
-                            $map: {
-                                input: '$booked',
-                                as: 'book',
-                                in: '$$book.slot'
-                            }
-                        }
-                    }
-                },
-                {
-                    $project: {
-                        name: 1,
-                        price: 1,
-                        slots: {
-                            $setDifference: ['$slots', '$booked']
-                        }
-                    }
-                }
-            ]).toArray();
-            res.send(options);
+        //*********** */
+        app.get('/category', async (req, res) => {
+            const query = {};
+            const product = await categoriesCollection.find(query).toArray();
+            res.send(product);
         })
 
-        app.get('/appointmentSpecialty', async (req, res) => {
-            const query = {}
-            const result = await appointmentOptionCollection.find(query).project({ name: 1 }).toArray();
-            res.send(result);
-        })
 
-        /***
-         * API Naming Convention 
-         * app.get('/bookings')
-         * app.get('/bookings/:id')
-         * app.post('/bookings')
-         * app.patch('/bookings/:id')
-         * app.delete('/bookings/:id')
-        */
 
-        app.get('/categories', verifyJWT, async (req, res) => {
-            const email = req.query.email;
-            const decodedEmail = req.decoded.email;
-
-            if (email !== decodedEmail) {
-                return res.status(403).send({ message: 'forbidden access' });
-            }
-
-            const query = { email: email };
-            const bookings = await bookingsCollection.find(query).toArray();
-            res.send(bookings);
+        app.get('/product-categories', (req, res) => {
+            res.send(category)
         });
-
-        app.get('/categories/:id', async (req, res) => {
+        app.get('/category/:id', (req, res) => {
             const id = req.params.id;
-            const query = { _id: ObjectId(id) };
-            const booking = await bookingsCollection.findOne(query);
-            res.send(booking);
+            const category_product = category.find(n => n.id == id);
+            res.send(category_product);
+
         })
-
-        app.post('/categories', async (req, res) => {
-            const booking = req.body;
-            console.log(booking);
-            const query = {
-                appointmentDate: booking.appointmentDate,
-                email: booking.email,
-                treatment: booking.treatment
-            }
-
-            const alreadyBooked = await bookingsCollection.find(query).toArray();
-
-            if (alreadyBooked.length) {
-                const message = `You already have a booking on ${booking.appointmentDate}`
-                return res.send({ acknowledged: false, message })
-            }
-
-            const result = await bookingsCollection.insertOne(booking);
-            res.send(result);
-        });
-
-
-
 
         app.get('/jwt', async (req, res) => {
             const email = req.query.email;
@@ -204,8 +102,6 @@ async function run() {
         app.post('/users', async (req, res) => {
             const user = req.body;
             console.log(user);
-            // TODO: make sure you do not enter duplicate user email
-            // only insert users if the user doesn't exist in the database
             const result = await usersCollection.insertOne(user);
             res.send(result);
         });
@@ -232,7 +128,7 @@ async function run() {
         //             price: 99
         //         }
         //     }
-        //     const result = await appointmentOptionCollection.updateMany(filter, updatedDoc, options);
+        //     const result = await productsCollection.updateMany(filter, updatedDoc, options);
         //     res.send(result);
         // })
 
@@ -263,7 +159,7 @@ async function run() {
 run().catch(console.log);
 
 app.get('/', async (req, res) => {
-    res.send('doctors portal server is running');
+    res.send('PhoneMax portal server is running');
 })
 
-app.listen(port, () => console.log(`Doctors portal running on ${port}`))
+app.listen(port, () => console.log(`PhoneMax portal running on ${port}`))
