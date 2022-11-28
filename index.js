@@ -3,7 +3,6 @@ const cors = require('cors');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const port = process.env.PORT || 5000;
 const app = express();
@@ -36,10 +35,7 @@ async function run() {
     try {
         const productsCollection = client.db('PhoneMax').collection('Products');
         const usersCollection = client.db('PhoneMax').collection('users');
-        const newCollection = client.db('PhoneMax').collection('NewAdd');
-        const buyersCollection = client.db('PhoneMax').collection('Buyers');
-        const paymentsCollection = client.db('doctorsPortal').collection('Payments');
-        const category = require('./data/Categories.json');
+        const bookingsCollection = client.db('PhoneMax').collection('Booking');
 
         const verifyAdmin = async (req, res, next) => {
             const decodedEmail = req.decoded.email;
@@ -51,30 +47,20 @@ async function run() {
             next();
         }
 
-
-
         app.get('/products', async (req, res) => {
             const query = {};
             const options = await productsCollection.find(query).toArray();
             res.send(options);
         });
 
-        //*********** *
         app.get('/product-categories', (req, res) => {
             res.send(categories)
         });
-
         app.get('/category/:id', (req, res) => {
             const id = req.params.id;
 
             const category_product = product.filter(n => n.category_id === id);
             res.send(category_product);
-
-            app.get('/addItem', async (req, res) => {
-                const query = {}
-                const result = await productsCollection.find(query).project({ name: 1 }).toArray();
-                res.send(result)
-            });
         })
 
 
@@ -138,36 +124,15 @@ async function run() {
 
 
         // add new items
-        app.post("/items", async (req, res) => {
-            const filter = req.body;
-            console.log(filter)
-            const result = await productsCollection.insertOne(filter);
-            res.send(result);
-        });
-
-        app.get("/items", async (req, res) => {
-            const filter = {};
-            const cursor = productsCollection.find(filter).sort({ $natural: -1 });
-            const service = await cursor.toArray();
-            res.send(service);
-        });
-
-
-        app.delete('/items/:id', verifyJWT, verifyAdmin, async (req, res) => {
-            const id = req.params.id;
-            const filter = { _id: ObjectId(id) };
-            const result = await productsCollection.deleteOne(filter);
-            res.send(result);
-        })
         // ****************************************************
 
+        app.post('/bookings', async (req, res) => {
+            const booking = req.body;
+            console.log(booking);
+            const result = await bookingsCollection.insertOne(booking);
+            res.send(result);
+        })
 
-
-        app.get('/appointmentSpecialty', async (req, res) => {
-            const query = {}
-            const result = await appointmentOptionCollection.find(query).project({ name: 1 }).toArray();
-            res.send(result)
-        });
 
     }
     finally {
