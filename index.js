@@ -14,6 +14,8 @@ app.use(express.json());
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.zwakwnm.mongodb.net/?retryWrites=true&w=majority1`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+
 function verifyJWT(req, res, next) {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
@@ -28,12 +30,13 @@ function verifyJWT(req, res, next) {
         next();
     })
 }
+const categories = require('./data/Categories.json');
+const product = require('./data/Products.json');
 async function run() {
     try {
         const productsCollection = client.db('PhoneMax').collection('Products');
-        const categoriesCollection = client.db('PhoneMax').collection('Categories');
         const usersCollection = client.db('PhoneMax').collection('users');
-        const sellersCollection = client.db('PhoneMax').collection('Sellers');
+        const newCollection = client.db('PhoneMax').collection('NewAdd');
         const buyersCollection = client.db('PhoneMax').collection('Buyers');
         const paymentsCollection = client.db('doctorsPortal').collection('Payments');
         const category = require('./data/Categories.json');
@@ -56,24 +59,25 @@ async function run() {
             res.send(options);
         });
 
-        //*********** */
-        app.get('/category', async (req, res) => {
-            const query = {};
-            const product = await categoriesCollection.find(query).toArray();
-            res.send(product);
-        })
-
-
-
+        //*********** *
         app.get('/product-categories', (req, res) => {
-            res.send(category)
+            res.send(categories)
         });
+
         app.get('/category/:id', (req, res) => {
             const id = req.params.id;
-            const category_product = category.find(n => n.id == id);
+
+            const category_product = product.filter(n => n.category_id === id);
             res.send(category_product);
 
+            app.get('/addItem', async (req, res) => {
+                const query = {}
+                const result = await productsCollection.find(query).project({ name: 1 }).toArray();
+                res.send(result)
+            });
         })
+
+
 
         app.get('/jwt', async (req, res) => {
             const email = req.query.email;
@@ -132,24 +136,38 @@ async function run() {
         //     res.send(result);
         // })
 
-        app.get('/doctors', verifyJWT, verifyAdmin, async (req, res) => {
-            const query = {};
-            const doctors = await doctorsCollection.find(query).toArray();
-            res.send(doctors);
-        })
 
-        app.post('/doctors', verifyJWT, verifyAdmin, async (req, res) => {
-            const doctor = req.body;
-            const result = await doctorsCollection.insertOne(doctor);
+        // add new items
+        app.post("/items", async (req, res) => {
+            const filter = req.body;
+            console.log(filter)
+            const result = await productsCollection.insertOne(filter);
             res.send(result);
         });
 
-        app.delete('/doctors/:id', verifyJWT, verifyAdmin, async (req, res) => {
+        app.get("/items", async (req, res) => {
+            const filter = {};
+            const cursor = productsCollection.find(filter).sort({ $natural: -1 });
+            const service = await cursor.toArray();
+            res.send(service);
+        });
+
+
+        app.delete('/items/:id', verifyJWT, verifyAdmin, async (req, res) => {
             const id = req.params.id;
             const filter = { _id: ObjectId(id) };
-            const result = await doctorsCollection.deleteOne(filter);
+            const result = await productsCollection.deleteOne(filter);
             res.send(result);
         })
+        // ****************************************************
+
+
+
+        app.get('/appointmentSpecialty', async (req, res) => {
+            const query = {}
+            const result = await appointmentOptionCollection.find(query).project({ name: 1 }).toArray();
+            res.send(result)
+        });
 
     }
     finally {
