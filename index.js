@@ -11,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.zwakwnm.mongodb.net/?retryWrites=true&w=majority1`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.zwakwnm.mongodb.net/?retryWrites=true`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 
@@ -46,6 +46,13 @@ async function run() {
             }
             next();
         }
+
+        app.post("/products", async (req, res) => {
+            const filter = req.body;
+            console.log(filter)
+            const result = await productsCollection.insertOne(filter);
+            res.send(result);
+        });
 
         app.get('/products', async (req, res) => {
             const query = {};
@@ -109,40 +116,36 @@ async function run() {
             res.send(result);
         });
 
-        // temporary to update price field on appointment options
-        // app.get('/addPrice', async (req, res) => {
-        //     const filter = {}
-        //     const options = { upsert: true }
-        //     const updatedDoc = {
-        //         $set: {
-        //             price: 99
-        //         }
-        //     }
-        //     const result = await productsCollection.updateMany(filter, updatedDoc, options);
-        //     res.send(result);
-        // })
-
-
-        // add new items
-        // ****************************************************
-
         app.post('/bookings', async (req, res) => {
             const booking = req.body;
             console.log(booking);
             const result = await bookingsCollection.insertOne(booking);
             res.send(result);
         })
-
+        app.get('/bookings', async (req, res) => {
+            const query = {};
+            const options = await bookingsCollection.find(query).toArray();
+            res.send(options);
+        });
+        app.get('/bookings/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const booking = await bookingsCollection.findOne(query);
+            res.send(booking);
+        });
 
     }
     finally {
 
     }
 }
-run().catch(console.log);
+run().catch(err => console.error(err));
 
-app.get('/', async (req, res) => {
-    res.send('PhoneMax portal server is running');
+
+app.get('/', (req, res) => {
+    res.send('PhoneMax server is running')
 })
 
-app.listen(port, () => console.log(`PhoneMax portal running on ${port}`))
+app.listen(port, () => {
+    console.log(`PhoneMax server running on ${port}`);
+})
